@@ -8,8 +8,9 @@ app.use(bodyParser.json());
 
 
 
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 12345;
 
+app.use("/", express.static("./public"));
 
 divorcesAPI(app);
 
