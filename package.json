@@ -21,11 +21,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "array-unique": "^0.3.2",
+    "assign-symbols": "^2.0.2",
+    "async": "^3.2.0",
+    "async-each": "^1.0.3",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "map-cache": "^0.2.2",
+    "map-visit": "^1.0.0",
     "nedb": "^1.8.0",
     "svelte-app": "^1.0.0",
     "svelte-spa-router": "^2.1.0",
-    "sveltestrap": "^3.3.3"
+    "sveltestrap": "^3.3.3",
+    "to-object-path": "^0.3.0"
   }
 }

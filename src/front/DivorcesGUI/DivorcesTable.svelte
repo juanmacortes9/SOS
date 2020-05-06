@@ -39,7 +39,7 @@
 	}
 
 	async function insertDivorce() {
-		console.log("Inserting marriage..." + JSON.stringify(newMarriage));
+		console.log("Inserting divorce..." + JSON.stringify(newDivorce));
 		if (newDivorce.country == "" || newDivorce.country == null || newDivorce.year == "" 
 			|| newDivorce.year == null) {
 			
