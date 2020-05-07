@@ -3,7 +3,7 @@ module.exports = function(app){
 	const path = require("path");
 	const dataStore = require("nedb");
 	const dbFileName = path.join(__dirname, "global-divorces.db");
-	const BASE_API_URL = "/api/v1";
+	const BASE_API_URL = "/api/v2";
 
 
 	const db = new dataStore({
@@ -56,13 +56,8 @@ app.get(BASE_API_URL+"/global-divorces", (req,res) =>{
 		divorces.forEach((d)=>{delete d._id;});
 		if(divorces.length>=1){
 			
-			if(divorces.length == 1){
-				res.send(JSON.stringify(divorces[0],null,2));
-			}
-			else{
-				res.send(JSON.stringify(divorces,null,2));
+			res.send(JSON.stringify(divorces,null,2));
 
-		}
 
 			console.log("Data sent:"+JSON.stringify(divorces,null,2));}
 		else{
@@ -74,6 +69,25 @@ app.get(BASE_API_URL+"/global-divorces", (req,res) =>{
 	
 });
 
+/////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////// GET DIVORCE BY COUNTRY AND YEAR/////////////////
+/////////////////////////////////////////////////////////////////////////////////	
+
+app.get(BASE_API_URL+"/global-divorces/:country/:year", (req,res) => {
+	var parametros = {"country": req.params.country,
+					 "year": parseInt(req.params.year)};
+   
+	db.find(parametros,  (err,divorces)=>{
+		console.log(divorces);
+		if (divorces.length != 0) {
+			divorces.forEach((d)=>{delete d._id;});
+			res.send(JSON.stringify(divorces[0],null,2));
+			console.log("Data sent: " + JSON.stringify(divorces[0],null,2));
+		} else{
+			res.sendStatus(404, "COUNTRY NOT FOUND");
+		}
+	})
+});
 
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,35 +97,21 @@ app.get(BASE_API_URL+"/global-divorces", (req,res) =>{
 	
 app.get(BASE_API_URL+"/global-divorces/loadInitialData",(req, res) => {
 	var initialData = [
-	{ 
-		country: "Spain",
-		year: 2017,
-		divorce: 97960,
-		crude_rate: 2.1,
-		variation: 0
-		
-	},
-	{ 
-		country: "Germany",
-		year: 2017,
-		divorce: 153501,
-		crude_rate: 1.9,
-		variation: -0.1
-	},
-	{
-		country:"Albania",
-		year: 2018,
-		divorce: 4846,
-		crude_rate: 1.7,
-		variation: 0.1
-	},
-	{
-		country:"Cyprus",
-		year: 2017,
-		divorce: 1932,
-		crude_rate: 2.2,
-		variation: -0.1
-	}
+	{ country: "Spain", year: 2017, divorce: 97960, crude_rate: 2.1, variation: 0 },
+	{ country: "Germany", year: 2017, divorce: 153501, crude_rate: 1.9, variation: -0.1 },
+	{ country:"Albania", year: 2018, divorce: 4846, crude_rate: 1.7, variation: 0.1},
+	{ country:"Cyprus", year: 2017, divorce: 1932, crude_rate: 2.2, variation: -0.1	},
+
+	{ country: "USA", year: 2016, divorce: 827261, crude_rate: 3.2, variation: 0.1 },
+	{ country: "Armenia", year: 2018, divorce: 3820, crude_rate: 1.3, variation: 0.1 },
+	{ country:"Belgium", year: 2017, divorce: 23068, crude_rate: 2, variation: -0.1},
+	{ country:"Switzerland", year: 2017, divorce: 16542, crude_rate: 1.9, variation: 0},
+
+	{ country:"Greece", year: 2017, divorce: 19190, crude_rate: 1.8, variation: 0.8},
+	{ country:"Ireland", year: 2015, divorce: 3289, crude_rate: 0.7, variation: 0.1},
+	{ country:"Iceland", year: 2011, divorce: 516, crude_rate: 1.6, variation: -0.2},
+
+
 ];
 
 	console.log("New GET .../loadInitialData");
