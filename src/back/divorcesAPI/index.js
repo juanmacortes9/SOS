@@ -102,7 +102,6 @@ app.get(BASE_API_URL+"/global-divorces/loadInitialData",(req, res) => {
 	{ country:"Albania", year: 2018, divorce: 4846, crude_rate: 1.7, variation: 0.1},
 	{ country:"Cyprus", year: 2017, divorce: 1932, crude_rate: 2.2, variation: -0.1	},
 
-	{ country: "USA", year: 2016, divorce: 827261, crude_rate: 3.2, variation: 0.1 },
 	{ country: "Armenia", year: 2018, divorce: 3820, crude_rate: 1.3, variation: 0.1 },
 	{ country:"Belgium", year: 2017, divorce: 23068, crude_rate: 2, variation: -0.1},
 	{ country:"Switzerland", year: 2017, divorce: 16542, crude_rate: 1.9, variation: 0},
@@ -110,6 +109,7 @@ app.get(BASE_API_URL+"/global-divorces/loadInitialData",(req, res) => {
 	{ country:"Greece", year: 2017, divorce: 19190, crude_rate: 1.8, variation: 0.8},
 	{ country:"Ireland", year: 2015, divorce: 3289, crude_rate: 0.7, variation: 0.1},
 	{ country:"Iceland", year: 2011, divorce: 516, crude_rate: 1.6, variation: -0.2},
+	{ country:"Sweden", year: 2018, divorce: 24958, crude_rate: 2.5, variation: 0.1},
 
 
 ];

@@ -134,12 +134,19 @@
 ////////////////////////////////       Insert Divorce      ///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////
 	async function insertDivorce() {
+		var pais =newDivorce.country;
+		var MyReg = /[0-9]/;
+
 		console.log("Inserting divorce..." + JSON.stringify(newDivorce));
 		if (newDivorce.country == "" || newDivorce.country == null || newDivorce.year == "" 
 			|| newDivorce.year == null) {
 			
 			errorAlert("Se debe incluir el nombre del país y el año obligatoriamente");
-		} else {
+		} 
+		else if(MyReg.test(pais)){
+			errorAlert("Formato de datos incorrecto");
+		}
+		else {
 				const res = await fetch("/api/v2/global-divorces", {
 					method: "POST",
 					body: JSON.stringify(newDivorce),
@@ -257,7 +264,7 @@ function errorResponse(res) {
 		Loading divorces...
 	{:then divorces}
 
-		<FormGroup> 
+		<FormGroup style="margin-top:60px"> 
 			<Label for="selectCountry"> Búsqueda por país </Label>
 			<Input type="text" placeholder="Introduce un país" bind:value="{currentCountry}">
 			</Input>
@@ -350,4 +357,24 @@ function errorResponse(res) {
 	<Button style="float: left; margin-left: 20px;" outline  color="secondary" on:click={pop} on:click={showPagination=true}>Atrás</Button>	
 	{/if}
 	
+	<div class="graficas">
+	
+	<Button  outline  color="primary" role="link" onclick="window.location = 'http://localhost:12345/#/globalDivorcesAPI/DivorcesGraph'">Gráfica HightChart</Button>
+	<Button  outline  color="primary" role="link" onclick="window.location = 'http://localhost:12345/#/globalDivorcesAPI/DivorcesGraph2'">Gráfica Chart.js</Button>
+
+	</div>
+
 </main>
+<style>
+.graficas {
+
+        position:absolute;
+
+        display:block;
+
+        bottom:530px;
+
+        left:10px;
+
+}
+</style>
